@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2022 CloudBees, Inc.
+  ~ All rights reserved.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.cloudbees.openfeature</groupId>
+  <artifactId>cloudbees-openfeature-provider</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <description>This is the CloudBees provider for OpenFeature, a vendor-agnostic abstraction library for evaluating feature flags.</description>
+  <url>https://www.cloudbees.com/products/feature-management</url>
+  <developers>
+    <developer>
+      <id>agentgonzo</id>
+      <name>Steve Arch</name>
+      <organization>CloudBees</organization>
+    </developer>
+  </developers>
+
+  <properties>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>dev.openfeature</groupId>
+      <artifactId>javasdk</artifactId>
+      <version>0.0.3-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>io.rollout.rox</groupId>
+      <artifactId>rox-java-server</artifactId>
+      <version>5.0.6</version>
+    </dependency>
+
+    <!--Build tools-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.24</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!--Test dependencies-->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.8.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+      <version>1.3</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+</project>
