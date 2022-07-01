@@ -11,7 +11,6 @@ import dev.openfeature.javasdk.FlagEvaluationOptions;
 import dev.openfeature.javasdk.Metadata;
 import dev.openfeature.javasdk.ProviderEvaluation;
 import dev.openfeature.javasdk.Reason;
-import io.rollout.context.Context;
 import io.rollout.rox.server.Rox;
 import java.util.concurrent.ExecutionException;
 import lombok.Getter;
@@ -43,7 +42,7 @@ public class CloudbeesProvider implements FeatureProvider {
     @Override
     public ProviderEvaluation<Boolean> getBooleanEvaluation(String key, Boolean defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
         return ProviderEvaluation.<Boolean>builder()
-                .value(Rox.dynamicAPI().isEnabled(key, defaultValue, new Context.Builder().from(ctx.toMap())))
+                .value(Rox.dynamicAPI().isEnabled(key, defaultValue, ContextTransformer.transform(ctx)))
                 .variant(ROX)
                 .reason(Reason.DEFAULT)
                 .build();
@@ -52,7 +51,7 @@ public class CloudbeesProvider implements FeatureProvider {
     @Override
     public ProviderEvaluation<String> getStringEvaluation(String key, String defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
         return ProviderEvaluation.<String>builder()
-                .value(Rox.dynamicAPI().getValue(key, defaultValue, new Context.Builder().from(ctx.toMap())))
+                .value(Rox.dynamicAPI().getValue(key, defaultValue, ContextTransformer.transform(ctx)))
                 .variant(ROX)
                 .reason(Reason.DEFAULT)
                 .build();
@@ -61,7 +60,7 @@ public class CloudbeesProvider implements FeatureProvider {
     @Override
     public ProviderEvaluation<Integer> getIntegerEvaluation(String key, Integer defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
         return ProviderEvaluation.<Integer>builder()
-                .value(Rox.dynamicAPI().getInt(key, defaultValue, new Context.Builder().from(ctx.toMap())))
+                .value(Rox.dynamicAPI().getInt(key, defaultValue, ContextTransformer.transform(ctx)))
                 .variant(ROX)
                 .reason(Reason.DEFAULT)
                 .build();
