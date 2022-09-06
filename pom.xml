@@ -67,6 +67,17 @@
     </dependency>
   </dependencies>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <!--https://security.snyk.io/vuln/SNYK-JAVA-ORGJSON-2841369 in rox-java-server 5.0.6-->
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20220320</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <build>
     <plugins>
       <plugin>
