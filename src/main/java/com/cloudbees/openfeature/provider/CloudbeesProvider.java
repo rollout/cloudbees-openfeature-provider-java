@@ -7,10 +7,10 @@ package com.cloudbees.openfeature.provider;
 
 import dev.openfeature.javasdk.EvaluationContext;
 import dev.openfeature.javasdk.FeatureProvider;
-import dev.openfeature.javasdk.FlagEvaluationOptions;
 import dev.openfeature.javasdk.Metadata;
 import dev.openfeature.javasdk.ProviderEvaluation;
 import dev.openfeature.javasdk.Reason;
+import dev.openfeature.javasdk.Structure;
 import io.rollout.rox.server.Rox;
 import java.util.concurrent.ExecutionException;
 import lombok.Getter;
@@ -40,7 +40,7 @@ public class CloudbeesProvider implements FeatureProvider {
     }
 
     @Override
-    public ProviderEvaluation<Boolean> getBooleanEvaluation(String key, Boolean defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
+    public ProviderEvaluation<Boolean> getBooleanEvaluation(String key, Boolean defaultValue, EvaluationContext ctx) {
         return ProviderEvaluation.<Boolean>builder()
                 .value(Rox.dynamicAPI().isEnabled(key, defaultValue, ContextTransformer.transform(ctx)))
                 .variant(ROX)
@@ -49,7 +49,7 @@ public class CloudbeesProvider implements FeatureProvider {
     }
 
     @Override
-    public ProviderEvaluation<String> getStringEvaluation(String key, String defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
+    public ProviderEvaluation<String> getStringEvaluation(String key, String defaultValue, EvaluationContext ctx) {
         return ProviderEvaluation.<String>builder()
                 .value(Rox.dynamicAPI().getValue(key, defaultValue, ContextTransformer.transform(ctx)))
                 .variant(ROX)
@@ -58,7 +58,7 @@ public class CloudbeesProvider implements FeatureProvider {
     }
 
     @Override
-    public ProviderEvaluation<Integer> getIntegerEvaluation(String key, Integer defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
+    public ProviderEvaluation<Integer> getIntegerEvaluation(String key, Integer defaultValue, EvaluationContext ctx) {
         return ProviderEvaluation.<Integer>builder()
                 .value(Rox.dynamicAPI().getInt(key, defaultValue, ContextTransformer.transform(ctx)))
                 .variant(ROX)
@@ -67,7 +67,16 @@ public class CloudbeesProvider implements FeatureProvider {
     }
 
     @Override
-    public <T> ProviderEvaluation<T> getObjectEvaluation(String key, T defaultValue, EvaluationContext invocationContext, FlagEvaluationOptions options) {
+    public ProviderEvaluation<Double> getDoubleEvaluation(String key, Double defaultValue, EvaluationContext ctx) {
+        return ProviderEvaluation.<Double>builder()
+                .value(Rox.dynamicAPI().getDouble(key, defaultValue, ContextTransformer.transform(ctx)))
+                .variant(ROX)
+                .reason(Reason.DEFAULT)
+                .build();
+    }
+
+    @Override
+    public ProviderEvaluation<Structure> getObjectEvaluation(String key, Structure defaultValue, EvaluationContext invocationContext) {
         throw new RuntimeException("Not implemented - CloudBees feature management does not support an 'Object' type. Only String, Number and Boolean");
     }
 }

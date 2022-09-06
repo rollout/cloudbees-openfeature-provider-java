@@ -16,6 +16,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class IntegrationTests {
+    public static final String STRING_PROPERTY = "stringproperty";
+    public static final String NUMBER_PROPERTY = "numberproperty";
+    public static final String BOOLEAN_PROPERTY = "booleanproperty";
     static Client client;
 
     @BeforeAll
@@ -36,8 +39,8 @@ public class IntegrationTests {
         assertThat(client.getBooleanValue("boolean-disabled", true), is(true));
 
         // Using a context
-        assertThat(client.getBooleanValue("boolean-with-context", false, new EvaluationContext().withStringAttribute("stringproperty", "on")), is(true));
-        assertThat(client.getBooleanValue("boolean-with-context", false, new EvaluationContext().withStringAttribute("stringproperty", "off")), is(false));
+        assertThat(client.getBooleanValue("boolean-with-context", false, new EvaluationContext().add(STRING_PROPERTY, "on")), is(true));
+        assertThat(client.getBooleanValue("boolean-with-context", false, new EvaluationContext().add(STRING_PROPERTY, "off")), is(false));
     }
 
     @Test
@@ -50,9 +53,9 @@ public class IntegrationTests {
         assertThat(client.getStringValue("string-disabled", "banana"), is("banana"));
 
         // Using a context
-        assertThat(client.getStringValue("string-with-context", "default", new EvaluationContext().withStringAttribute("stringproperty", "on")), is("yes"));
-        assertThat(client.getStringValue("string-with-context", "default", new EvaluationContext().withStringAttribute("stringproperty", "off")), is("no"));
-        assertThat(client.getStringValue("string-with-context", "default", new EvaluationContext().withStringAttribute("not defined", "whatever")), is("not specified"));
+        assertThat(client.getStringValue("string-with-context", "default", new EvaluationContext().add(STRING_PROPERTY, "on")), is("yes"));
+        assertThat(client.getStringValue("string-with-context", "default", new EvaluationContext().add(STRING_PROPERTY, "off")), is("no"));
+        assertThat(client.getStringValue("string-with-context", "default", new EvaluationContext().add("not defined", "whatever")), is("not specified"));
         assertThat(client.getStringValue("string-with-context", "default", new EvaluationContext()), is("not specified"));
         assertThat(client.getStringValue("string-with-context", "default"), is("not specified"));
     }
@@ -66,10 +69,25 @@ public class IntegrationTests {
         assertThat(client.getIntegerValue("integer-disabled", 7), is(7));
 
         // Using a context
-        assertThat(client.getIntegerValue("integer-with-context", -1, new EvaluationContext().withStringAttribute("stringproperty", "1")), is(1));
-        assertThat(client.getIntegerValue("integer-with-context", -1, new EvaluationContext().withStringAttribute("stringproperty", "5")), is(5));
-        assertThat(client.getIntegerValue("integer-with-context", -1, new EvaluationContext().withStringAttribute("not defined", "whatever")), is(10));
+        assertThat(client.getIntegerValue("integer-with-context", -1, new EvaluationContext().add(STRING_PROPERTY, "1")), is(1));
+        assertThat(client.getIntegerValue("integer-with-context", -1, new EvaluationContext().add(STRING_PROPERTY, "5")), is(5));
+        assertThat(client.getIntegerValue("integer-with-context", -1, new EvaluationContext().add("not defined", "whatever")), is(10));
         assertThat(client.getIntegerValue("integer-with-context", -1, new EvaluationContext()), is(10));
         assertThat(client.getIntegerValue("integer-with-context", -1), is(10));
+    }
+
+    @Test
+    public void testFlagsWithDifferentlyTypedContextObjects() {
+        // Test positive matches for supported types (string/number/boolean)
+        assertThat(client.getIntegerValue("integer-with-complex-context", -1, new EvaluationContext().add(STRING_PROPERTY, "one")), is(1));
+        assertThat(client.getIntegerValue("integer-with-complex-context", -1, new EvaluationContext().add(NUMBER_PROPERTY, 1)), is(1));
+        assertThat(client.getIntegerValue("integer-with-complex-context", -1, new EvaluationContext().add(NUMBER_PROPERTY, 1.0)), is(1));
+        assertThat(client.getIntegerValue("integer-with-complex-context", -1, new EvaluationContext().add(BOOLEAN_PROPERTY, true)), is(1));
+
+        // Test negative matches for supported types (string/number/boolean) - it should serve the default value
+        assertThat(client.getIntegerValue("integer-with-complex-context", -1, new EvaluationContext().add(STRING_PROPERTY, "no")), is(-1));
+        assertThat(client.getIntegerValue("integer-with-complex-context", -1, new EvaluationContext().add(NUMBER_PROPERTY, 0)), is(-1));
+        assertThat(client.getIntegerValue("integer-with-complex-context", -1, new EvaluationContext().add(NUMBER_PROPERTY, 0.0)), is(-1));
+        assertThat(client.getIntegerValue("integer-with-complex-context", -1, new EvaluationContext().add(BOOLEAN_PROPERTY, false)), is(-1));
     }
 }
