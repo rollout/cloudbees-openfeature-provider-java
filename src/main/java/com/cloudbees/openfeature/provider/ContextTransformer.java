@@ -43,6 +43,6 @@ class ContextTransformer {
         // TODO - What do we do with the rox SemVer type?
 
         // and throw an exception for non-supperted types.
-        throw new IllegalArgumentException("CloudBees Provider SDK only supports strings as Evaluation Context values");
+        throw new IllegalArgumentException("CloudBees Provider SDK only supports strings/numbers/booleans as Evaluation Context values");
     }
 }

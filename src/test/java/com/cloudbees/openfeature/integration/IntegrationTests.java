@@ -8,7 +8,13 @@ package com.cloudbees.openfeature.integration;
 import com.cloudbees.openfeature.provider.CloudbeesProvider;
 import dev.openfeature.javasdk.Client;
 import dev.openfeature.javasdk.EvaluationContext;
+import dev.openfeature.javasdk.FlagEvaluationDetails;
 import dev.openfeature.javasdk.OpenFeatureAPI;
+import dev.openfeature.javasdk.Reason;
+import dev.openfeature.javasdk.Structure;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.Collections;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -89,5 +95,21 @@ public class IntegrationTests {
         assertThat(client.getIntegerValue("integer-with-complex-context", -1, new EvaluationContext().add(NUMBER_PROPERTY, 0)), is(-1));
         assertThat(client.getIntegerValue("integer-with-complex-context", -1, new EvaluationContext().add(NUMBER_PROPERTY, 0.0)), is(-1));
         assertThat(client.getIntegerValue("integer-with-complex-context", -1, new EvaluationContext().add(BOOLEAN_PROPERTY, false)), is(-1));
+
+        // Test that other types of context values throw an error
+        FlagEvaluationDetails<Integer> evaluationDetails = client.getIntegerDetails("integer-with-complex-context", -1, new EvaluationContext().add("badproperty", Collections.emptyList()));
+        assertThat(evaluationDetails.getValue(), is(-1)); // default
+        assertThat(evaluationDetails.getReason(), is(Reason.ERROR));
+        assertThat(evaluationDetails.getErrorCode(), is("CloudBees Provider SDK only supports strings/numbers/booleans as Evaluation Context values"));
+
+        evaluationDetails = client.getIntegerDetails("integer-with-complex-context", -1, new EvaluationContext().add("badproperty", new Structure()));
+        assertThat(evaluationDetails.getValue(), is(-1)); // default
+        assertThat(evaluationDetails.getReason(), is(Reason.ERROR));
+        assertThat(evaluationDetails.getErrorCode(), is("CloudBees Provider SDK only supports strings/numbers/booleans as Evaluation Context values"));
+
+        evaluationDetails = client.getIntegerDetails("integer-with-complex-context", -1, new EvaluationContext().add("badproperty", Instant.now().atZone(ZoneId.systemDefault())));
+        assertThat(evaluationDetails.getValue(), is(-1)); // default
+        assertThat(evaluationDetails.getReason(), is(Reason.ERROR));
+        assertThat(evaluationDetails.getErrorCode(), is("CloudBees Provider SDK only supports strings/numbers/booleans as Evaluation Context values"));
     }
 }
