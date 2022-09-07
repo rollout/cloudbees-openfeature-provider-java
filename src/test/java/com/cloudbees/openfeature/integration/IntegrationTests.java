@@ -83,6 +83,16 @@ public class IntegrationTests {
     }
 
     @Test
+    public void testObjectFlags() {
+        final Structure defaultValue = new Structure();
+        defaultValue.add("one", 1);
+        FlagEvaluationDetails<Structure> details = client.getObjectDetails("not-supported", defaultValue);
+        assertThat(details.getValue(), is(defaultValue));
+        assertThat(details.getReason(), is(Reason.ERROR));
+        assertThat(details.getErrorCode(), is("Not implemented - CloudBees feature management does not support an 'Object' type. Only String, Number and Boolean"));
+    }
+
+    @Test
     public void testFlagsWithDifferentlyTypedContextObjects() {
         // Test positive matches for supported types (string/number/boolean)
         assertThat(client.getIntegerValue("integer-with-complex-context", -1, new EvaluationContext().add(STRING_PROPERTY, "one")), is(1));
