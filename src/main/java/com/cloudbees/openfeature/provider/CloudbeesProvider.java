@@ -12,7 +12,9 @@ import dev.openfeature.javasdk.ProviderEvaluation;
 import dev.openfeature.javasdk.Reason;
 import dev.openfeature.javasdk.Structure;
 import io.rollout.rox.server.Rox;
+import io.rollout.rox.server.RoxOptions;
 import java.util.concurrent.ExecutionException;
+import javax.annotation.Nullable;
 import lombok.Getter;
 
 public class CloudbeesProvider implements FeatureProvider {
@@ -27,8 +29,17 @@ public class CloudbeesProvider implements FeatureProvider {
      * @param appKey the CloudBees app key (also known as the environment ID)
      */
     public CloudbeesProvider(String appKey) {
+        this(appKey, null);
+    }
+
+    /**
+     * Creates a new CloudBees Provider.
+     * @param appKey the CloudBees app key (also known as the environment ID)
+     * @param options The {@link RoxOptions} to initialise with
+     */
+    public CloudbeesProvider(String appKey, @Nullable RoxOptions options) {
         try {
-            Rox.setup(appKey).get();
+            Rox.setup(appKey, options).get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
