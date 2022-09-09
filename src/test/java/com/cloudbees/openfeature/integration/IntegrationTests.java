@@ -81,6 +81,21 @@ public class IntegrationTests {
         assertThat(client.getIntegerValue("integer-with-context", -1, new EvaluationContext()), is(10));
         assertThat(client.getIntegerValue("integer-with-context", -1), is(10));
     }
+    @Test
+    public void testDoubleFlags() {
+        // Targeting on.
+        assertThat(client.getDoubleValue("integer-static-5", 5.0), is(5.0));
+
+        // Targeting off - uses the default values
+        assertThat(client.getDoubleValue("integer-disabled", 7.0), is(7.0));
+
+        // Using a context
+        assertThat(client.getDoubleValue("integer-with-context", -1.0, new EvaluationContext().add(STRING_PROPERTY, "1")), is(1.0));
+        assertThat(client.getDoubleValue("integer-with-context", -1.0, new EvaluationContext().add(STRING_PROPERTY, "5")), is(5.0));
+        assertThat(client.getDoubleValue("integer-with-context", -1.0, new EvaluationContext().add("not defined", "whatever")), is(10.0));
+        assertThat(client.getDoubleValue("integer-with-context", -1.0, new EvaluationContext()), is(10.0));
+        assertThat(client.getDoubleValue("integer-with-context", -1.0), is(10.0));
+    }
 
     @Test
     public void testObjectFlags() {
