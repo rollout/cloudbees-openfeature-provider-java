@@ -26,6 +26,12 @@
       <organization>CloudBees</organization>
     </developer>
   </developers>
+  <scm>
+    <url>https://github.com/vrollout/cloudbees-openfeature-provider-java</url>
+    <connection>scm:git:https:github.com/rollout/cloudbees-openfeature-provider-java.git</connection>
+    <developerConnection>scm:git:https://github.com/rollout/cloudbees-openfeature-provider-java.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
 
   <properties>
     <maven.compiler.source>8</maven.compiler.source>
