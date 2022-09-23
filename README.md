@@ -24,14 +24,14 @@ Maven:
 <dependency>
     <groupId>com.cloudbees.openfeature</groupId>
     <artifactId>cloudbees-openfeature-provider</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.1</version>
 </dependency>
 ```
 
 Gradle:
 ```groovy
 dependencies {
-    implementation 'com.cloudbees.openfeature:cloudbees-openfeature-provider:0.0.1-SNAPSHOT'
+    implementation 'com.cloudbees.openfeature:cloudbees-openfeature-provider:0.1.1'
 }
 ```
 
