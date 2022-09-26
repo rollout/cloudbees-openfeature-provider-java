@@ -14,6 +14,7 @@
   </parent>
   <groupId>com.cloudbees.openfeature</groupId>
   <artifactId>cloudbees-openfeature-provider</artifactId>
+  <name>CloudBees OpenFeature provider</name>
   <version>0.1.2-SNAPSHOT</version>
   <description>This is the CloudBees provider for OpenFeature, a vendor-agnostic abstraction library for evaluating feature flags.</description>
   <url>https://www.cloudbees.com/products/feature-management</url>
