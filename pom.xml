@@ -46,7 +46,7 @@
     <dependency>
       <groupId>io.rollout.rox</groupId>
       <artifactId>rox-java-server</artifactId>
-      <version>5.0.6</version>
+      <version>5.0.7</version>
     </dependency>
 
     <!--Build tools-->
@@ -71,17 +71,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <!--https://security.snyk.io/vuln/SNYK-JAVA-ORGJSON-2841369 in rox-java-server 5.0.6-->
-        <groupId>org.json</groupId>
-        <artifactId>json</artifactId>
-        <version>20220320</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <build>
     <plugins>
