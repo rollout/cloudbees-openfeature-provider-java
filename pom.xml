@@ -40,8 +40,8 @@
   <dependencies>
     <dependency>
       <groupId>dev.openfeature</groupId>
-      <artifactId>javasdk</artifactId>
-      <version>0.1.1</version>
+      <artifactId>sdk</artifactId>
+      <version>0.3.0</version>
     </dependency>
     <dependency>
       <groupId>io.rollout.rox</groupId>

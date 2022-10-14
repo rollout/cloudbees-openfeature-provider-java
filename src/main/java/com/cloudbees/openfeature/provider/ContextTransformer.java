@@ -5,8 +5,9 @@
 
 package com.cloudbees.openfeature.provider;
 
-import dev.openfeature.javasdk.EvaluationContext;
-import dev.openfeature.javasdk.Value;
+import dev.openfeature.sdk.EvaluationContext;
+import dev.openfeature.sdk.Value;
+import dev.openfeature.sdk.exceptions.InvalidContextError;
 import io.rollout.context.Context;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,9 +33,7 @@ class ContextTransformer {
         // Try to build the map as correctly as possible
         if (value.isString()) {
             return value.asString();
-        } else if (value.isInteger()) {
-            return value.asInteger();
-        } else if (value.isDouble()) {
+        } else if (value.isNumber()) {
             return value.asDouble();
         } else if (value.isBoolean()) {
             return value.asBoolean();
@@ -42,7 +41,7 @@ class ContextTransformer {
 
         // TODO - What do we do with the rox SemVer type?
 
-        // and throw an exception for non-supperted types.
-        throw new IllegalArgumentException("CloudBees Provider SDK only supports strings/numbers/booleans as Evaluation Context values");
+        // and throw an exception for non-supported types.
+        throw new InvalidContextError("CloudBees Provider SDK only supports strings/numbers/booleans as Evaluation Context values");
     }
 }

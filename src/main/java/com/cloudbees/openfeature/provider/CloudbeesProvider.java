@@ -5,12 +5,13 @@
 
 package com.cloudbees.openfeature.provider;
 
-import dev.openfeature.javasdk.EvaluationContext;
-import dev.openfeature.javasdk.FeatureProvider;
-import dev.openfeature.javasdk.Metadata;
-import dev.openfeature.javasdk.ProviderEvaluation;
-import dev.openfeature.javasdk.Reason;
-import dev.openfeature.javasdk.Structure;
+import dev.openfeature.sdk.EvaluationContext;
+import dev.openfeature.sdk.FeatureProvider;
+import dev.openfeature.sdk.Metadata;
+import dev.openfeature.sdk.ProviderEvaluation;
+import dev.openfeature.sdk.Reason;
+import dev.openfeature.sdk.Value;
+import dev.openfeature.sdk.exceptions.InvalidContextError;
 import io.rollout.rox.server.Rox;
 import io.rollout.rox.server.RoxOptions;
 import java.util.concurrent.ExecutionException;
@@ -55,7 +56,7 @@ public class CloudbeesProvider implements FeatureProvider {
         return ProviderEvaluation.<Boolean>builder()
                 .value(Rox.dynamicAPI().isEnabled(key, defaultValue, ContextTransformer.transform(ctx)))
                 .variant(ROX)
-                .reason(Reason.DEFAULT)
+                .reason(Reason.TARGETING_MATCH.name())
                 .build();
     }
 
@@ -64,7 +65,7 @@ public class CloudbeesProvider implements FeatureProvider {
         return ProviderEvaluation.<String>builder()
                 .value(Rox.dynamicAPI().getValue(key, defaultValue, ContextTransformer.transform(ctx)))
                 .variant(ROX)
-                .reason(Reason.DEFAULT)
+                .reason(Reason.TARGETING_MATCH.name())
                 .build();
     }
 
@@ -73,7 +74,7 @@ public class CloudbeesProvider implements FeatureProvider {
         return ProviderEvaluation.<Integer>builder()
                 .value(Rox.dynamicAPI().getInt(key, defaultValue, ContextTransformer.transform(ctx)))
                 .variant(ROX)
-                .reason(Reason.DEFAULT)
+                .reason(Reason.TARGETING_MATCH.name())
                 .build();
     }
 
@@ -82,12 +83,12 @@ public class CloudbeesProvider implements FeatureProvider {
         return ProviderEvaluation.<Double>builder()
                 .value(Rox.dynamicAPI().getDouble(key, defaultValue, ContextTransformer.transform(ctx)))
                 .variant(ROX)
-                .reason(Reason.DEFAULT)
+                .reason(Reason.TARGETING_MATCH.name())
                 .build();
     }
 
     @Override
-    public ProviderEvaluation<Structure> getObjectEvaluation(String key, Structure defaultValue, EvaluationContext invocationContext) {
-        throw new RuntimeException("Not implemented - CloudBees feature management does not support an 'Object' type. Only String, Number and Boolean");
+    public ProviderEvaluation<Value> getObjectEvaluation(String s, Value value, EvaluationContext evaluationContext) {
+        throw new InvalidContextError("Not implemented - CloudBees feature management does not support an 'Object' type. Only String, Number and Boolean");
     }
 }

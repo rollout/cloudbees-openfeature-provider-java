@@ -1,8 +1,8 @@
 # cloudbees-openfeature-provider
 
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![OpenFeature Specification](https://img.shields.io/static/v1?label=OpenFeature%20Specification&message=v0.4.0&color=yellow)](https://github.com/open-feature/spec/tree/v0.4.0)
-[![OpenFeature SDK](https://img.shields.io/static/v1?label=OpenFeature%20Java%20SDK&message=v0.1.1&color=yellow)](https://github.com/open-feature/java-sdk/tree/0.1.1)
+[![OpenFeature Specification](https://img.shields.io/static/v1?label=OpenFeature%20Specification&message=v0.5.0&color=yellow)](https://github.com/open-feature/spec/tree/v0.4.0)
+[![OpenFeature SDK](https://img.shields.io/static/v1?label=OpenFeature%20Java%20SDK&message=v0.3.0&color=green)](https://github.com/open-feature/java-sdk/tree/0.3.0)
 [![CloudBees Rox SDK](https://img.shields.io/static/v1?label=Rox%20SDK&message=v5.0.6&color=green)](https://mvnrepository.com/artifact/io.rollout.rox/rox-java-server)
 [![Known Vulnerabilities](https://snyk.io/test/github/rollout/cloudbees-openfeature-provider-java/badge.svg)](https://snyk.io/test/github/rollout/cloudbees-openfeature-provider-java)
 
@@ -24,14 +24,14 @@ Maven:
 <dependency>
     <groupId>com.cloudbees.openfeature</groupId>
     <artifactId>cloudbees-openfeature-provider</artifactId>
-    <version>0.1.1</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
 Gradle:
 ```groovy
 dependencies {
-    implementation 'com.cloudbees.openfeature:cloudbees-openfeature-provider:0.1.1'
+    implementation 'com.cloudbees.openfeature:cloudbees-openfeature-provider:0.3.0'
 }
 ```
 
