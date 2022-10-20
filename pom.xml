@@ -41,7 +41,7 @@
     <dependency>
       <groupId>dev.openfeature</groupId>
       <artifactId>sdk</artifactId>
-      <version>0.3.0</version>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
       <groupId>io.rollout.rox</groupId>
