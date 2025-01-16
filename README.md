@@ -2,7 +2,7 @@
 
 [![OpenFeature Specification](https://img.shields.io/static/v1?label=OpenFeature%20Specification&message=v0.5.1&color=yellow)](https://github.com/open-feature/spec/tree/v0.5.1)
 [![OpenFeature SDK](https://img.shields.io/static/v1?label=OpenFeature%20Java%20SDK&message=v1.0.0&color=green)](https://github.com/open-feature/java-sdk/tree/1.0.0)
-[![CloudBees Rox SDK](https://img.shields.io/static/v1?label=Rox%20SDK&message=v5.0.6&color=green)](https://mvnrepository.com/artifact/io.rollout.rox/rox-java-server)
+[![CloudBees Rox SDK](https://img.shields.io/static/v1?label=Rox%20SDK&message=v6.0.0&color=green)](https://mvnrepository.com/artifact/io.rollout.rox/rox-java-server)
 [![Known Vulnerabilities](https://snyk.io/test/github/rollout/cloudbees-openfeature-provider-java/badge.svg)](https://snyk.io/test/github/rollout/cloudbees-openfeature-provider-java)
 
 This is the [CloudBees](https://www.cloudbees.com/products/feature-management) provider implementation for [OpenFeature](https://openfeature.dev/) for the [Java SDK](https://github.com/open-feature/java-sdk).
@@ -23,14 +23,14 @@ Maven:
 <dependency>
     <groupId>com.cloudbees.openfeature</groupId>
     <artifactId>cloudbees-openfeature-provider</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
 Gradle:
 ```groovy
 dependencies {
-    implementation 'com.cloudbees.openfeature:cloudbees-openfeature-provider:1.0.0'
+    implementation 'com.cloudbees.openfeature:cloudbees-openfeature-provider:1.0.1'
 }
 ```
 
