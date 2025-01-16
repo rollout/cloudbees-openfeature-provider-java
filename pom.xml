@@ -29,7 +29,7 @@
     <url>https://github.com/rollout/cloudbees-openfeature-provider-java</url>
     <connection>scm:git:https:github.com/rollout/cloudbees-openfeature-provider-java.git</connection>
     <developerConnection>scm:git:https://github.com/rollout/cloudbees-openfeature-provider-java.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>cloudbees-openfeature-provider-1.0.1</tag>
   </scm>
 
   <properties>

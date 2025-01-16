@@ -27,6 +27,7 @@ public class CloudbeesProvider implements FeatureProvider {
 
     /**
      * Creates a new CloudBees Provider.
+     * 
      * @param appKey the CloudBees app key (also known as the environment ID)
      */
     public CloudbeesProvider(String appKey) {
@@ -35,7 +36,8 @@ public class CloudbeesProvider implements FeatureProvider {
 
     /**
      * Creates a new CloudBees Provider.
-     * @param appKey the CloudBees app key (also known as the environment ID)
+     * 
+     * @param appKey  the CloudBees app key (also known as the environment ID)
      * @param options The {@link RoxOptions} to initialise with
      */
     public CloudbeesProvider(String appKey, @Nullable RoxOptions options) {
@@ -89,6 +91,7 @@ public class CloudbeesProvider implements FeatureProvider {
 
     @Override
     public ProviderEvaluation<Value> getObjectEvaluation(String s, Value value, EvaluationContext evaluationContext) {
-        throw new InvalidContextError("Not implemented - CloudBees feature management does not support an 'Object' type. Only String, Number and Boolean");
+        throw new InvalidContextError(
+                "Not implemented - CloudBees feature management does not support an 'Object' type. Only String, Number and Boolean");
     }
 }
